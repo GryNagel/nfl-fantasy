@@ -12,7 +12,6 @@ import {
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import variablesStylesheetUrl from "./styles/variables.css";
 import stylesStylesheetUrl from "./styles/styles.css";
-import { getUser } from "./session.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -27,12 +26,6 @@ export const meta: MetaFunction = () => ({
   title: "Remix Notes",
   viewport: "width=device-width,initial-scale=1",
 });
-
-export async function loader({ request }: LoaderArgs) {
-  return json({
-    user: await getUser(request),
-  });
-}
 
 export default function App() {
   return (

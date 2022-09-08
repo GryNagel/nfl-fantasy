@@ -2,53 +2,13 @@ import type { Player} from "~/models/players.server";
 import { getPlayers, updatePlayer } from "~/models/players.server";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { Form, useLoaderData, useSubmit } from "@remix-run/react";
 
-import { useOptionalUser } from "~/utils";
-import { Form, Link, useLoaderData, useSubmit } from "@remix-run/react";
 import type { SelectOption } from "~/components/Select";
 import Select from "~/components/Select";
 import type { FormEvent } from "react";
 import FilterLink from "~/components/NavLink";
-
-function getTagBackground(tag: string): string {
-  switch (tag) {
-    case "Rookie":
-      return "var(--rookie)";
-    case "Deepsleeper":
-      return "var(--deep-sleeper)";
-    case "Sleeper":
-      return "var(--sleeper)";
-    case "Bust":
-      return "var(--bust)";
-    case "Bargain":
-      return "var(--bargain)";
-    case "Breakout":
-      return "var(--breakout)";
-    case "IR":
-      return "var(--ir)";
-    case "Suspension":
-      return "var(--suspension)";
-    default:
-      return "transparent";
-  }
-}
-
-function getRoleBackground(role: string): string {
-  switch (role) {
-    case "RB":
-      return "var(--rookie)";
-    case "WR":
-      return "var(--deep-sleeper)";
-    case "TE":
-      return "var(--sleeper)";
-    case "QB":
-      return "var(--bust)";
-    case "DST":
-      return "var(--bargain)";
-    default:
-      return "transparent";
-  }
-}
+import { getRoleBackground, getTagBackground } from "~/styles/styleUtils";
 
 const tagOptions: SelectOption[] = [
   { value: "Rookie", label: "Rookie" },
@@ -111,7 +71,6 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const user = useOptionalUser();
   const data = useLoaderData<typeof loader>();
   const submit = useSubmit();
 
